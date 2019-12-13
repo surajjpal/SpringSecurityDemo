@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,8 +42,8 @@ public class CrudController {
         return new ResponseEntity<EmployeeEntity>(entity, new HttpHeaders(), HttpStatus.OK);
     }
 	
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<EmployeeEntity> createOrUpdateEmployee(EmployeeEntity employee) {
+	@PostMapping()
+    public ResponseEntity<EmployeeEntity> createOrUpdateEmployee(@RequestBody EmployeeEntity employee) {
 		System.out.println("testing"+employee.toString());
 		EmployeeEntity updated = service.createOrUpdateEmployee(employee);
         return new ResponseEntity<EmployeeEntity>(updated, new HttpHeaders(), HttpStatus.OK);
